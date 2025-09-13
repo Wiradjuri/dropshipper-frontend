@@ -29,14 +29,15 @@ export type Order = {
   tracking_number?: string | null;
 };
 
+const API = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000";
+
 export async function getHealth() {
-  const res = await fetch("http://localhost:8000/health");
+  const res = await fetch(`${API}/health`);
   if (!res.ok) throw new Error("Backend health check failed");
   return res.json();
 }
 
 // Product CRUD
-const API = "http://localhost:8000";
 
 export async function listProducts(): Promise<Product[]> {
   const res = await fetch(`${API}/products`);
